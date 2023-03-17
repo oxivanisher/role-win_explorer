@@ -3,7 +3,6 @@
 
 - name: Check my user name
   ansible.windows.win_whoami:
-  become: true
 
 - name: Ensure Explorer includes the file extension in file names.
   ansible.windows.win_regedit:
