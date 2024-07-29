@@ -2,4 +2,4 @@
 # defaults file for win_explorer
 win_explorer_users:
   - Default
-  - "{{ ansibe_user }}"
+  - "{{ ansible_user }}"
