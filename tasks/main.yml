@@ -12,7 +12,7 @@
 
 - name: Ensure Explorer includes the file extension in file names for ansible_user
   ansible.windows.win_regedit:
-    path: HKLM:\ANSIBLE\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
     name: HideFileExt
     data: 0
     type: dword
@@ -21,7 +21,7 @@
 - name: Ensure Ribbon menu is disabled in Windows Explorer for win_explorer_users
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
-    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Ribbon
+    path: HKLM:\ANSIBLE\Software\Microsoft\Windows\CurrentVersion\Explorer\Ribbon
     name: MinimizedStateTabletModeOff
     data: 1
     type: dword
@@ -38,7 +38,7 @@
 - name: Ensure new Right-click Context Menu disabled for win_explorer_users
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
-    path: HKCU:\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32
+    path: HKLM:\ANSIBLE\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32
     data: ""
     type: string
   loop: "{{ win_explorer_users }}"
