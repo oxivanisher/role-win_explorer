@@ -1,31 +1,28 @@
 ---
 # Based on: https://github.com/AlexNabokikh/windows-playbook/blob/8be81399018d151e5f4f5ea08034fc4bd0ad30da/tasks/explorer.yml
 
-- name: Check my user name
-  ansible.windows.win_whoami:
-
-- name: Ensure Explorer includes the file extension in file names.
+- name: Ensure Explorer includes the file extension in file names
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
     path: HKLM:\ANSIBLE\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
     name: HideFileExt
     data: 0
     type: dword
-  loop: "{{ windows_users }}"
+  loop: "{{ win_explorer_users }}"
 
-- name: Ensure Ribbon menu is disabled in Windows Explorer.
+- name: Ensure Ribbon menu is disabled in Windows Explorer
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
     path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Ribbon
     name: MinimizedStateTabletModeOff
     data: 1
     type: dword
-  loop: "{{ windows_users }}"
+  loop: "{{ win_explorer_users }}"
 
-- name: Ensure new Right-click Context Menu disabled.
+- name: Ensure new Right-click Context Menu disabled
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
     path: HKCU:\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32
     data: ""
     type: string
-  loop: "{{ windows_users }}"
+  loop: "{{ win_explorer_users }}"
