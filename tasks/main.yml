@@ -1,7 +1,7 @@
 ---
 # Based on: https://github.com/AlexNabokikh/windows-playbook/blob/8be81399018d151e5f4f5ea08034fc4bd0ad30da/tasks/explorer.yml
 
-- name: Ensure Explorer includes the file extension in file names
+- name: Ensure Explorer includes the file extension in file names for win_explorer_users
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
     path: HKLM:\ANSIBLE\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
@@ -10,7 +10,15 @@
     type: dword
   loop: "{{ win_explorer_users }}"
 
-- name: Ensure Ribbon menu is disabled in Windows Explorer
+- name: Ensure Explorer includes the file extension in file names for ansible_user
+  ansible.windows.win_regedit:
+    path: HKLM:\ANSIBLE\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: HideFileExt
+    data: 0
+    type: dword
+  when: win_explorer_also_for_ansible_user | bool
+
+- name: Ensure Ribbon menu is disabled in Windows Explorer for win_explorer_users
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
     path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Ribbon
@@ -19,10 +27,25 @@
     type: dword
   loop: "{{ win_explorer_users }}"
 
-- name: Ensure new Right-click Context Menu disabled
+- name: Ensure Ribbon menu is disabled in Windows Explorer for ansible_user
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Ribbon
+    name: MinimizedStateTabletModeOff
+    data: 1
+    type: dword
+  when: win_explorer_also_for_ansible_user | bool
+
+- name: Ensure new Right-click Context Menu disabled for win_explorer_users
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
     path: HKCU:\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32
     data: ""
     type: string
   loop: "{{ win_explorer_users }}"
+
+- name: Ensure new Right-click Context Menu disabled for ansible_user
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32
+    data: ""
+    type: string
+  when: win_explorer_also_for_ansible_user | bool
