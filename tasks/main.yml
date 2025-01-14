@@ -18,6 +18,7 @@
     type: dword
   when: win_explorer_also_for_ansible_user | bool
 
+
 - name: Ensure Ribbon menu is disabled in Windows Explorer for win_explorer_users
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
@@ -34,6 +35,7 @@
     data: 1
     type: dword
   when: win_explorer_also_for_ansible_user | bool
+
 
 - name: Ensure new Right-click Context Menu disabled for win_explorer_users
   ansible.windows.win_regedit:

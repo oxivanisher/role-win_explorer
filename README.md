@@ -1,7 +1,10 @@
 win_explorer
 ============
 
-Configure explorer related settings.
+Configure explorer related settings:
+* Show file extensions
+* Disable ribbon menu
+* Disable new right-click context menu
 
 Requirements
 ------------
