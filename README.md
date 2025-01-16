@@ -5,6 +5,7 @@ Configure explorer related settings:
 * Show file extensions
 * Disable ribbon menu
 * Disable new right-click context menu
+* Disable "Edit in Notepad" in right-click context menu
 
 Requirements
 ------------
