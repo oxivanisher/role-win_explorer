@@ -6,6 +6,7 @@ Configure explorer related settings:
 * Disable ribbon menu
 * Disable new right-click context menu
 * Disable "Edit in Notepad" in right-click context menu
+* Removes the "Onedrive Personal" in left pane
 
 Requirements
 ------------
