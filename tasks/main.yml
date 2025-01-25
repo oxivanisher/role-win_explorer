@@ -74,14 +74,12 @@
 - name: Disable 'Onedrive Personal' in the left pane for win_explorer_users
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
-    path: HKLM:\ANSIBLE\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace
-    name: "{018D5C66-4533-4307-9B53-224DE2ED1FE6}"
+    path: HKLM:\ANSIBLE\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}
     state: absent
   loop: "{{ win_explorer_users }}"
 
 - name: Disable 'Onedrive Personal' in the left pane for ansible_user
   ansible.windows.win_regedit:
-    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace
-    name: "{018D5C66-4533-4307-9B53-224DE2ED1FE6}"
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace{018D5C66-4533-4307-9B53-224DE2ED1FE6}
     state: absent
   when: win_explorer_also_for_ansible_user | bool
