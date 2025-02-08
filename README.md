@@ -1,5 +1,6 @@
 win_explorer
 ============
+[![Ansible Lint](https://github.com/oxivanisher/role-win_explorer/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/oxivanisher/role-win_explorer/actions/workflows/ansible-lint.yml)
 
 Configure explorer related settings:
 * Show file extensions
