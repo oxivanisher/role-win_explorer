@@ -9,6 +9,8 @@
     data: 0
     type: dword
   loop: "{{ win_explorer_users }}"
+  loop_control:
+    label: "{{ item }}"
 
 - name: Ensure Explorer includes the file extension in file names for ansible_user
   ansible.windows.win_regedit:
@@ -27,6 +29,8 @@
     data: 1
     type: dword
   loop: "{{ win_explorer_users }}"
+  loop_control:
+    label: "{{ item }}"
 
 - name: Ensure Ribbon menu is disabled in Windows Explorer for ansible_user
   ansible.windows.win_regedit:
@@ -44,6 +48,8 @@
     data: ""
     type: string
   loop: "{{ win_explorer_users }}"
+  loop_control:
+    label: "{{ item }}"
 
 - name: Ensure new right-click context menu disabled for ansible_user
   ansible.windows.win_regedit:
@@ -61,6 +67,8 @@
     data: ""
     type: string
   loop: "{{ win_explorer_users }}"
+  loop_control:
+    label: "{{ item }}"
 
 - name: Disable 'Edit in Notepad' in the right-click context menu for ansible_user
   ansible.windows.win_regedit:
@@ -77,6 +85,8 @@
     path: HKLM:\ANSIBLE\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}
     state: absent
   loop: "{{ win_explorer_users }}"
+  loop_control:
+    label: "{{ item }}"
 
 - name: Disable 'Onedrive Personal' in the left pane for ansible_user
   ansible.windows.win_regedit:
